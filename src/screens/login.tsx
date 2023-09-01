@@ -1,10 +1,27 @@
+// ui components
 import { Button, Flex, Stack } from "@react-native-material/core";
-import { View, Text } from "react-native";
-import { navigate } from "../routes/navigation";
+import { Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+
+// navigation
+import { navigate } from "../routes/navigation";
+
+// styles
 import { loginStyles } from "../styles";
+
+// wallet connections
+import { WalletConnectModal, useWalletConnectModal } from '@walletconnect/modal-react-native'
+import { projectId, providerMetadata } from "../lib/wallet-connect";
+
+
 export const Login = () => {
-  return (
+
+    const { isOpen, open, close, provider, isConnected, address } = useWalletConnectModal();
+    
+    // console.log("Address", address);
+    console.log("provider", provider?.session?.self.metadata);
+
+    return (
     <Flex fill center>
       <LinearGradient
         colors={["#1C2438", "#0D154F", "#142177", "#581E88"]}
@@ -25,10 +42,11 @@ export const Login = () => {
             style={loginStyles.button}
           />
           <Button
-            onPress={() => navigate("AccessScreen")}
+            onPress={() => open()}
             title="Wallet Connect"
             style={loginStyles.button}
           />
+          <WalletConnectModal projectId={projectId} providerMetadata={providerMetadata} />
         </Stack>
       </LinearGradient>
     </Flex>
