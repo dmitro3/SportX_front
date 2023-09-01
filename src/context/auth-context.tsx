@@ -1,7 +1,9 @@
 // react
 import {
+  Dispatch,
     FC,
     ReactNode,
+    SetStateAction,
     createContext,
     memo,
     useContext,
@@ -26,8 +28,8 @@ import {
     isUserCompleteOnboarding: boolean;
     mainStackSelect: "Login" | "Access" | "Tabs" | undefined;
     setUserCompleteOnboarding: React.Dispatch<React.SetStateAction<boolean>>;
-    updateUserLocalInfo: () => void;
     logOut: () => void;
+    setMainStackSelect: Dispatch<SetStateAction<"Login" | "Access" | "Tabs" | undefined>>;
   }
   
   // create context
@@ -83,18 +85,7 @@ import {
             // TODO: log out
         // return auth.signOut();
       }
-  
-      // main navigation logic
-      useEffect(() => {
-        if (!isAuthGetComplete) {
-          setMainStackSelect(undefined);
-        } else if (Boolean(user) && isUserCompleteOnboarding) {
-          setMainStackSelect("Tabs");
-        } else {
-          setMainStackSelect("Login");
-        }
-      }, [user, isUserCompleteOnboarding, isAuthGetComplete]);
-  
+
     //   // get the user and save them and also save the status that the request is done (need to know that the user is simply not saved)
     //   useEffect(() => {
     //     onAuthStateChanged(auth, (user: FirebaseUser | null) => {
@@ -131,11 +122,11 @@ import {
     //   }, []);
   
       // function to update local user information
-      async function updateUserLocalInfo() {
-        const _userInfo = await getUserData(user.uid);
+      // async function updateUserLocalInfo() {
+      //   const _userInfo = await getUserData(user.uid);
   
-        setUser(_userInfo);
-      }
+      //   setUser(_userInfo);
+      // }
   
       return (
         <userAuthContext.Provider
@@ -147,7 +138,7 @@ import {
             isUserCompleteOnboarding,
             setUserCompleteOnboarding,
             mainStackSelect,
-            updateUserLocalInfo,
+            setMainStackSelect
           }}
         >
           {children}
