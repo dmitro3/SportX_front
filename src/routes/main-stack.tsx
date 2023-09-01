@@ -14,9 +14,6 @@ import { MainStackParamsList } from "../types";
 import { AccessScreen, Login, SplashScreen } from "../screens";
 import { TabNavigation } from "./tab-navigation";
 
-// contexts
-import { splashScreenContext } from "../context/splash-context";
-import { useUserAuth } from "../context/auth-context";
 
 
 enableScreens();
@@ -29,7 +26,7 @@ export const MainStackNavigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <MainStack.Navigator
-        initialRouteName="Splash"
+        initialRouteName="Login"
         screenOptions={{
           headerShown: false,
         }}
@@ -37,7 +34,7 @@ export const MainStackNavigation = () => {
         <MainStack.Screen name="Login" component={Login} />
         <MainStack.Screen name="AccessScreen" component={AccessScreen} />
         <MainStack.Screen name="Tabs" component={TabNavigation} />
-        <MainStack.Screen name="Splash" component={SplashScreen} />
+        {/* <MainStack.Screen name="Splash" component={SplashScreen} /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );

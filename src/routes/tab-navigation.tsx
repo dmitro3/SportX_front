@@ -1,5 +1,5 @@
 // ui
-import { Image, Text, StyleSheet } from "react-native";
+import { Image, Text, StyleSheet, View } from "react-native";
 
 // navigation
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -12,6 +12,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 
 // screens
 import { Home, WalletScreen } from "../screens";
+import { Flex } from "@react-native-material/core";
 
 const Tabs = createBottomTabNavigator<TabsParamsList>();
 
@@ -34,20 +35,20 @@ export const TabNavigation = () => {
                 color: focused ? "red" : "black",
               }}
             >
-              Explore
+              Home
             </Text>
           ),
           tabBarStyle: { paddingBottom: 7, paddingTop: 5 },
           tabBarIcon: ({ focused }) => (
             <Entypo
-              id="wallet"
-              name="wallet"
+              id="home"
+              name="home"
               style={[
-                styles.icon,
                 {
-                  backgroundColor: focused ? "red" : "black",
+                  backgroundColor: focused ? "#ff33ff" : "transparent",
                 },
               ]}
+              size={20}
             />
           ),
         }}
@@ -63,21 +64,23 @@ export const TabNavigation = () => {
                 color: focused ? "red" : "black",
               }}
             >
-              For You
+              Wallet
             </Text>
           ),
           tabBarStyle: { paddingBottom: 7, paddingTop: 5 },
           tabBarIcon: ({ focused }) => (
-            <Entypo
-              id="home"
-              name="home"
+           <View style={styles.icon_container} >
+             <Entypo
+              id="wallet"
+              name="wallet"
               style={[
-                styles.icon,
                 {
-                  backgroundColor: focused ? "red" : "black",
+                  backgroundColor: focused ? "red" : "transparent",
                 },
               ]}
+              size={20}
             />
+           </View>
           ),
         }}
       />
@@ -86,8 +89,10 @@ export const TabNavigation = () => {
 };
 
 const styles = StyleSheet.create({
-  icon: {
-    width: 25,
-    height: 25,
+  icon_container: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center"
   },
 });

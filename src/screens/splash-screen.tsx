@@ -4,21 +4,20 @@ import * as ExpoSplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { navigate } from "../routes/navigation";
 
-// enable expo splash screen
-ExpoSplashScreen.preventAutoHideAsync();
 
 // enable expo splash screen
-ExpoSplashScreen.preventAutoHideAsync();
+// ExpoSplashScreen.preventAutoHideAsync();
 
 export const SplashScreen = () => {
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            ExpoSplashScreen.hideAsync();
-            navigate("Login");
-        }, 5000);
-
-        return clearTimeout(timer);
-    }, [])
+    console.log("Hello World from SplashScreen");
+    navigate("Login");
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         // ExpoSplashScreen.hideAsync();
+    //         navigate("Login");
+    //     }, 500);
+        
+    //     return clearTimeout(timer);
+    // }, [])
   return <></>;
 };
