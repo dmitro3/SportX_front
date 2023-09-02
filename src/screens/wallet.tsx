@@ -58,7 +58,7 @@ export const WalletScreen = () => {
                     borderBottomLeftRadius: 20,
                     borderBottomRightRadius: 20
                 }}>
-                    <Text style={walletStyles.invite_text}>Earn more SportCoins</Text>
+                    <Text style={walletStyles.invite_text}>Earn more SportXCoins</Text>
                     <Text style={walletStyles.invite_text}>Invite more friends and earn from 10 to 1000 SX Coins from each invited friends</Text>
                     <LinearGradient
                         colors={['#574aff', '#6d61ff']}
