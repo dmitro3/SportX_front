@@ -4,25 +4,33 @@ import { LinearGradient } from "expo-linear-gradient";
 import { homeStyles } from "../styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import MapView, { Marker, Polygon } from 'react-native-maps';
+import MapView, { Marker, Polygon } from "react-native-maps";
 import { Steps, StickyBalance } from "../components";
 import React from "react";
 import MapViewDirections from "react-native-maps-directions";
+import { EXPO_GOOGLE_API_KEY } from "@env";
+import * as Location from "expo-location";
 
 export const Home = () => {
   const [coordinates, setCoordinates] = useState<any>(null);
-  
-// // Пример 
-  
-//   useEffect(() => {
-//     Location.watchPositionAsync({accuracy: Location.Accuracy.High, timeInterval: 10}, (new_location) => {
-//       const end = new_location;
-//       const calculatedSpeed = calculateSpeed(new_location);
-//       console.log("calculatedSpeed", calculatedSpeed)
-//       setLocation(new_location);
-//     })
-//   }, [setLocation,location]);
-  
+  const [location, setLocation] = useState<any>(null);
+
+  let MapData = {
+    distance: 0,
+    duration: 0,
+  };
+
+  // // Пример
+
+  useEffect(() => {
+    Location.watchPositionAsync(
+      { accuracy: Location.Accuracy.High, timeInterval: 10 },
+      (new_location) => {
+        setLocation(new_location);
+      }
+    );
+  }, [setLocation, location]);
+
   useEffect(() => {
     axios
       .get("https://9698-5-173-16-56.ngrok-free.app/maps/polygons")
@@ -65,28 +73,41 @@ export const Home = () => {
               longitudeDelta: 0.0421,
             }}
           >
-            {/* <MapViewDirections
-          origin={coordinates}
-          destination={coordinates[0]}
-          apikey={""}
-          strokeWidth={3}
-          strokeColor="hotpink"
-          onReady={result => {
-            console.log(result)
-          }}
-        /> */}
-            {coordinates && coordinates.map((item: any, index: number) => (
-              // <React.Fragment key={index}>
-              <Polygon
-                key={index}
-                coordinates={item}
-                strokeWidth={0.6}
-                strokeColor={"blue"}
-                fillColor={"rgba(255, 0, 0,.3)"}
-              />
+            <Marker
+              coordinate={
+                location
+                  ? location.coords
+                  : {
+                      latitude: 0,
+                      longitude: 0,
+                    }
+              }
+            />
+            <MapViewDirections
+              apikey={`${EXPO_GOOGLE_API_KEY.toString()}`}
+              mode="WALKING"
+              strokeWidth={3}
+              strokeColor="hotpink"
+              onStart={(result) => {
+                MapData.distance = result.distance;
+                MapData.duration = result.duration;
+                console.log(`Distance: ${MapData.distance} km`);
+                console.log(`Duration: ${MapData.duration} min.`);
+              }}
+            />
+            {coordinates &&
+              coordinates.map((item: any, index: number) => (
+                // <React.Fragment key={index}>
+                <Polygon
+                  key={index}
+                  coordinates={item}
+                  strokeWidth={0.6}
+                  strokeColor={"blue"}
+                  fillColor={"rgba(255, 0, 0,.3)"}
+                />
 
-              // </React.Fragment>
-            ))}
+                // </React.Fragment>
+              ))}
           </MapView>
         </View>
       </LinearGradient>

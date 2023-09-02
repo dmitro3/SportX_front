@@ -29,6 +29,7 @@ import { useEffect, useState } from "react";
 export const Login = () => {
   const { isOpen, open, close, provider, isConnected, address } =
     useWalletConnectModal();
+
   const [ isWalletConnectWasClicked, setIsWalletConectWasClicked ] = useState<boolean>(false);
     useEffect(() => {
       const func = async () => {
