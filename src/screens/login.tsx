@@ -1,5 +1,5 @@
 // ui components
-import { Flex } from "@react-native-material/core";
+import { Button, Flex } from "@react-native-material/core";
 import { Text, Alert, Pressable, Image, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -22,11 +22,11 @@ import axios from "axios";
 import { useUserContext } from "../context/auth-context";
 import { getUserData } from "../api/get-user-data";
 import { CookieJar } from "tough-cookie";
+import { CustomBottomSheetModal } from "../components";
 
 export const Login = () => {
-  const { isOpen, open, close, provider, isConnected, address } =
+  const { open, close, provider, isConnected, address } =
     useWalletConnectModal();
-  provider?.disconnect();
 
   const { setUser } = useUserContext();
 
@@ -82,16 +82,6 @@ export const Login = () => {
           <Text style={loginStyles.header_fourth}>Run</Text>
           <Text style={loginStyles.header_fifth}>Earn</Text>
          </View>
-          {/* <Button
-            onPress={() => loginHandler("wallet")}
-            title="Go to next page"
-            style={loginStyles.button}
-          /> */}
-          {/* <Button
-            onPress={() => navigate("AccessScreen")}
-            title="Discord Login"
-            style={loginStyles.button}
-          /> */}
           <View
             style={{
               flexDirection: "row",
@@ -127,6 +117,7 @@ export const Login = () => {
             projectId={projectId}
             providerMetadata={providerMetadata}
           />
+          <CustomBottomSheetModal />
       </LinearGradient>
     </Flex>
   );

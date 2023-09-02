@@ -3,6 +3,7 @@ import { MainStackNavigation } from "./src/routes/main-stack";
 import { SafeAreaView } from "react-native";
 import { SplashScreenContextProvider } from "./src/context/splash-context";
 import { AuthContextProvider } from "./src/context/auth-context";
+import { BottomSheetProvider } from "./src/context/bottom-sheet-context";
 
 const App = () => {
   return (
@@ -10,19 +11,11 @@ const App = () => {
       <SafeAreaView />
       <AuthContextProvider>
         <SplashScreenContextProvider>
-          <MainStackNavigation />
+          <BottomSheetProvider>
+            <MainStackNavigation />
+          </BottomSheetProvider>
         </SplashScreenContextProvider>
       </AuthContextProvider>
-      {/* <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-      >
-        <View>
-          <Text>Awesome 🎉</Text>
-        </View>
-      </BottomSheet> */}
     </GestureHandlerRootView>
   );
 };

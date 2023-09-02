@@ -1,6 +1,6 @@
 // ui
 import { StyleSheet, TouchableOpacity, Image, Text } from "react-native";
-import BottomSheet from "@gorhom/bottom-sheet";
+import { useBottomSheet } from "../context/bottom-sheet-context";
 
 // navigation
 import { CurvedBottomBarExpo } from "react-native-curved-bottom-bar";
@@ -15,6 +15,7 @@ import { TabDataProvider, useTabData } from "../context/tab-context";
 
 const TabNavigator = () => {
   const { selectedTab, setSelectedTab, fetchData } = useTabData();
+  const { isOpen, handleBottomSheet} = useBottomSheet();
 
   useEffect(() => {
     fetchData();
@@ -104,9 +105,7 @@ const TabNavigator = () => {
       renderCircle={({ selectedTab, navigate, routeName }) => (
         <TouchableOpacity
           style={[styles.btnCircle]}
-          onPress={() => {
-            navigate(routeName);
-          }}
+          onPress={handleBottomSheet}
         >
           <Image
             style={{

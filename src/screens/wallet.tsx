@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { walletStyles } from "../styles";
 import ProfileImage from "../components/profile-image";
 import { useUserContext } from "../context/auth-context";
+import { CustomBottomSheetModal } from "../components";
 
 
 export const WalletScreen = () => {
