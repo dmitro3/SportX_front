@@ -1,5 +1,5 @@
 // ui
-import { Image, Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 
 // navigation
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -12,6 +12,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 
 // screens
 import { Home, WalletScreen } from "../screens";
+import { WalletStackNavigation } from "./wallet-stack";
 
 const Tabs = createBottomTabNavigator<TabsParamsList>();
 
@@ -21,8 +22,22 @@ export const TabNavigation = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        tabBarStyle: {
-          paddingBottom: 10,
+        // tabBarStyle: {
+        //   paddingBottom: 10,
+        //   borderBottomLeftRadius: 20,
+        //   borderBottomRightRadius: 20,
+        //   borderTopLeftRadius: 20,
+        //   borderTopRightRadius: 20,
+        //   marginBottom: 50,
+        // }
+        tabBarStyle:{
+          backgroundColor:"#0e121d",
+          height:100,
+        },
+        tabBarItemStyle:{
+          backgroundColor:'#1c2438',
+          margin:5,
+          borderRadius:10,
         }
       }}
     >
@@ -34,6 +49,7 @@ export const TabNavigation = () => {
             <Text
               style={{
                 fontSize: 15,
+                color: "white"
               }}
             >
               Home
@@ -50,13 +66,14 @@ export const TabNavigation = () => {
         }}
       />
       <Tabs.Screen
-        name="Wallet"
-        component={WalletScreen}
+        name="WalletStack"
+        component={WalletStackNavigation}
         options={{
           tabBarLabel: ({ focused }) => (
             <Text
               style={{
                 fontSize: 15,
+                color: "white"
               }}
             >
               Wallet

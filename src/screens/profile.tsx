@@ -1,13 +1,10 @@
-import { Avatar, Flex, Stack } from "@react-native-material/core";
-import { View, Text, Pressable } from "react-native";
+import { Flex, Stack } from "@react-native-material/core";
+import { View, Text } from "react-native";
 import { navigate } from "../routes/navigation";
 import { LinearGradient } from "expo-linear-gradient";
 import { walletStyles } from "../styles";
-import { Image } from "react-native-svg";
-import ProfileImage from "../components/profile-image";
 
-
-export const WalletScreen = () => {
+export const Profile = () => {
   return (
     <Flex fill center>
       <LinearGradient
@@ -17,11 +14,9 @@ export const WalletScreen = () => {
         end={{ x: 1, y: 1 }}
       >
           <View style={walletStyles.header_container}>
-            <Pressable onPress={() => navigate("Profile")}>
-              <ProfileImage  style={walletStyles.avatar}/>
-            </Pressable>
+            {/* Header */}
           </View>
-          <Text style={walletStyles.header_text}>Balance</Text>
+          <Text style={walletStyles.header_text}>It's me, and we are gonna learn C++</Text>
       </LinearGradient>
     </Flex>
   );

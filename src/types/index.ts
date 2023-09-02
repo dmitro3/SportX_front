@@ -1,8 +1,9 @@
 import { User } from "./user";
-import { MainStackParamsList, TabsParamsList } from "./navigation-types";
+import { MainStackParamsList, TabsParamsList, WalletParamsList } from "./navigation-types";
 
 export {
     User,
     MainStackParamsList,
-    TabsParamsList
+    TabsParamsList,
+    WalletParamsList
 }
