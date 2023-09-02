@@ -18,7 +18,7 @@ export const walletStyles = StyleSheet.create({
     },
     header_text: {
         color: "white",
-        fontSize: 40,
+        fontSize: 25,
         fontWeight: "bold",
     },
     button: {

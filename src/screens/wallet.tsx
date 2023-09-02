@@ -1,4 +1,4 @@
-import { Flex, Stack } from "@react-native-material/core";
+import { Box, Flex, Stack } from "@react-native-material/core";
 import { View, Text, Pressable, Image} from "react-native";
 import { navigate } from "../routes/navigation";
 import { LinearGradient } from "expo-linear-gradient";
@@ -26,12 +26,12 @@ export const WalletScreen = () => {
           </View>
           <Text style={walletStyles.header_text}>Balance</Text>
           <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", width: "100%"}} >
-            <Text style={{ fontSize: 20, color: "white" }}>{user?.balance}</Text>
+            <Text style={{ fontSize: 40, color: "white" }}>{parseFloat((user?.balance || 0.00).toString())}</Text>
             <Image 
               source={require("../assets/images/glow.png")}
               style={{
-                width: 50,
-                height: 50
+                width: 70,
+                height: 70
               }}
             />
           </View>

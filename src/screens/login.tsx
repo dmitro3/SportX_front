@@ -1,6 +1,6 @@
 // ui components
 import {Avatar, Button, Flex, Stack} from "@react-native-material/core";
-import {Text, Alert, Pressable, Image} from "react-native";
+import {Text, Alert, Pressable, Image, View} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 // @ts-ignore
 import cookie from 'cookie-parse'; // Используйте cookie-parse или аналогичную библиотеку
@@ -24,23 +24,36 @@ import { projectId, providerMetadata } from "../lib/wallet-connect";
 import axios from "axios";
 import { useUserContext } from "../context/auth-context";
 import { getUserData } from "../api/get-user-data";
-import { CookieJar } from "tough-cookie";
+import { useEffect, useState } from "react";
 
 export const Login = () => {
   const { isOpen, open, close, provider, isConnected, address } =
     useWalletConnectModal();
-  provider?.disconnect();
+  const [ isWalletConnectWasClicked, setIsWalletConectWasClicked ] = useState<boolean>(false);
+    useEffect(() => {
+      const func = async () => {
+        const value = await AsyncStorage.getItem("access_token");
+      }
+      func()
+    }, [])
 
     const {setUser} = useUserContext();
     const _handlePressButtonAsync = async () => {
         const callbackUrl = Linking.createURL("App", {scheme: "mobile"})
         console.log(callbackUrl)
 
-        let result = await WebBrowser.openAuthSessionAsync(`https://9f23-5-173-16-56.ngrok-free.app/auth/discord?redirect_url=${callbackUrl}`, callbackUrl, {
+        let result = await WebBrowser.openAuthSessionAsync(`https://9698-5-173-16-56.ngrok-free.app/auth/discord?redirect_url=${callbackUrl}`, callbackUrl, {
             preferEphemeralSession: true
         });
         console.log(result)
     };
+
+    const authHandler = async () => {
+      const result = await getUserData();
+
+      setUser(result);
+      navigationHandler();
+    }
 
     const navigationHandler = async () => {
         const value = await AsyncStorage.getItem("@Expo_Location_Access:");
@@ -52,8 +65,8 @@ export const Login = () => {
     };
 
     const loginHandler = async (type: string) => {
-        if (type === "wallet") {
-            const result = await axios.post(`https://9f23-5-173-16-56.ngrok-free.app/auth/web3`, {
+        if (type === "wallet" && isConnected) {
+            const result = await axios.post(`https://9698-5-173-16-56.ngrok-free.app/auth/web3`, {
                 address: address
             }, {
                 withCredentials: true
@@ -79,7 +92,6 @@ export const Login = () => {
             }
         }
     }
-  };
 
   return (
     <Flex fill center>
@@ -99,16 +111,6 @@ export const Login = () => {
           <Text style={loginStyles.header_fourth}>Run</Text>
           <Text style={loginStyles.header_fifth}>Earn</Text>
          </View>
-          {/* <Button
-            onPress={() => loginHandler("wallet")}
-            title="Go to next page"
-            style={loginStyles.button}
-          /> */}
-          {/* <Button
-            onPress={() => navigate("AccessScreen")}
-            title="Discord Login"
-            style={loginStyles.button}
-          /> */}
           <View
             style={{
               flexDirection: "row",
@@ -129,7 +131,10 @@ export const Login = () => {
                 source={require("../assets/images/discord.png")}
               />
             </Pressable>
-            <Pressable onPress={() => open()}>
+            <Pressable onPress={() => {
+              setIsWalletConectWasClicked((prev: boolean) => !prev);
+              open()
+            }}>
               <Image
                 style={{
                   width: 60,
@@ -140,6 +145,75 @@ export const Login = () => {
               />
             </Pressable>
           </View>
+          <LinearGradient
+        colors={['#574aff', '#6d61ff']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={{
+          width: 200,
+          height: 55,
+          justifyContent: 'center',
+          alignItems: "center",
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+        }}
+      >
+          <Pressable 
+            style={{
+              backgroundColor: "transparent",
+              shadowColor: '#fff',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.8,
+              shadowRadius: 10,
+            }}
+            onPress={() => isConnected && isWalletConnectWasClicked ? loginHandler("wallet"):authHandler()}
+          ><Text style={{
+            color: "white",
+            fontSize: 25,
+            // fontWeight: "bold",
+            fontFamily: "Oswald"
+          }}>Login</Text></Pressable>
+      </LinearGradient>
+      <LinearGradient
+        colors={['#574aff', '#6d61ff']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={{
+          width: 200,
+          height: 55,
+          justifyContent: 'center',
+          alignItems: "center",
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          marginTop: 10
+        }}
+      >
+          <Pressable 
+            style={{
+              backgroundColor: "transparent",
+              shadowColor: '#fff',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.8,
+              shadowRadius: 10,
+            }}
+            onPress={() => isConnected && isWalletConnectWasClicked ? loginHandler("wallet"):authHandler()}
+          ><Text style={{
+            color: "white",
+            fontSize: 25,
+            // fontWeight: "bold",
+            fontFamily: "Oswald"
+          }}>Registration</Text></Pressable>
+      </LinearGradient>
           <WalletConnectModal
             projectId={projectId}
             providerMetadata={providerMetadata}

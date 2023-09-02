@@ -1,20 +1,33 @@
 import { View, Text, Image } from "react-native";
-import { navigate } from "../routes/navigation";
 import { Button, Flex } from "@react-native-material/core";
 import { LinearGradient } from "expo-linear-gradient";
 import { homeStyles } from "../styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import MapView, { Polygon } from "react-native-maps";
-import { CustomBottomSheetModal, Steps, StickyBalance } from "../components";
+import MapView, { Marker, Polygon } from 'react-native-maps';
+import { Steps, StickyBalance } from "../components";
+import React from "react";
+import MapViewDirections from "react-native-maps-directions";
 
 export const Home = () => {
-  const [coordinate, setCoordinate] = useState([]);
+  const [coordinates, setCoordinates] = useState<any>(null);
+  
+// // Пример 
+  
+//   useEffect(() => {
+//     Location.watchPositionAsync({accuracy: Location.Accuracy.High, timeInterval: 10}, (new_location) => {
+//       const end = new_location;
+//       const calculatedSpeed = calculateSpeed(new_location);
+//       console.log("calculatedSpeed", calculatedSpeed)
+//       setLocation(new_location);
+//     })
+//   }, [setLocation,location]);
+  
   useEffect(() => {
     axios
-      .get("https://0809-5-173-16-56.ngrok-free.app/maps/polygons")
+      .get("https://9698-5-173-16-56.ngrok-free.app/maps/polygons")
       .then((res) => {
-        setCoordinate(res.data);
+        setCoordinates(res.data);
       });
   }, []);
 
@@ -52,7 +65,18 @@ export const Home = () => {
               longitudeDelta: 0.0421,
             }}
           >
-            {coordinate.map((item: any, index) => (
+            <MapViewDirections
+          origin={coordinates}
+          destination={props.region}
+          apikey={API_MAP.API}
+          strokeWidth={3}
+          strokeColor="hotpink"
+          onReady={result => {
+            console.log(result)
+          }}
+        />
+            {coordinates && coordinates.map((item: any, index: number) => (
+              // <React.Fragment key={index}>
               <Polygon
                 key={index}
                 coordinates={item}
@@ -60,6 +84,8 @@ export const Home = () => {
                 strokeColor={"blue"}
                 fillColor={"rgba(255, 0, 0,.3)"}
               />
+
+              // </React.Fragment>
             ))}
           </MapView>
         </View>

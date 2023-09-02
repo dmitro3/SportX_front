@@ -1,6 +1,5 @@
 // ui
 import { StyleSheet, TouchableOpacity, Image, Text } from "react-native";
-import { useBottomSheet } from "../context/bottom-sheet-context";
 
 // navigation
 import { CurvedBottomBarExpo } from "react-native-curved-bottom-bar";
@@ -12,10 +11,11 @@ import { WalletStackNavigation } from "./wallet-stack";
 // hooks
 import { useEffect } from "react";
 import { TabDataProvider, useTabData } from "../context/tab-context";
+import { useBottomSheet } from "../hooks/useBottomSheet";
 
 const TabNavigator = () => {
   const { selectedTab, setSelectedTab, fetchData } = useTabData();
-  const { isOpen, handleBottomSheet} = useBottomSheet();
+  const { openModal } = useBottomSheet()
 
   useEffect(() => {
     fetchData();
@@ -105,7 +105,7 @@ const TabNavigator = () => {
       renderCircle={({ selectedTab, navigate, routeName }) => (
         <TouchableOpacity
           style={[styles.btnCircle]}
-          onPress={handleBottomSheet}
+          onPress={openModal}
         >
           <Image
             style={{

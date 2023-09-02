@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-export const useProfileModal = create<{
+export const useBottomSheet = create<{
   isOpenModal: boolean;
-  openProfileModal: () => void;
+  openModal: () => void;
   closeModal: () => void;
 }>((set) => ({
   isOpenModal: false,
   isProfileWidgetOpen: false,
-  openProfileModal: () =>
+  openModal: () =>
     set((state) => {
       return { ...state, isOpenModal: true,};
     }),

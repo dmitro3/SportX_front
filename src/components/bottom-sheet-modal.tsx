@@ -1,22 +1,22 @@
 import React, { useCallback, useMemo } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useBottomSheet } from "../context/bottom-sheet-context";
 import { Button } from "@react-native-material/core";
 import { BottomSheet } from "react-native-btr";
+import { useBottomSheet } from "../hooks/useBottomSheet";
 
 export const CustomBottomSheetModal = () => {
-  const { isOpen, handleBottomSheet } = useBottomSheet();
+  const { isOpenModal, closeModal } = useBottomSheet();
   return (
     <BottomSheet
-      visible={!isOpen}
+      visible={isOpenModal}
       //setting the visibility state of the bottom shee
-      onBackButtonPress={handleBottomSheet}
+      onBackButtonPress={close}
       //Toggling the visibility state on the click of the back botton
-      onBackdropPress={handleBottomSheet}
+      onBackdropPress={close}
     >
       <View style={styles.bottomNavigationView}>
         <Text>Awesome 🎉</Text>
-        <Button onPress={handleBottomSheet} title="Close"></Button>
+        <Button onPress={close} title="Close"></Button>
       </View>
     </BottomSheet>
   );
