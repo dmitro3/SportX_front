@@ -7,35 +7,24 @@ import { accessStyles } from "../styles";
 // navigation
 import { navigate } from "../routes/navigation";
 // location
-import * as Location from 'expo-location';
-import { useEffect } from "react";
+import * as Location from "expo-location";
+// storage
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AccessScreen = () => {
-
-  useEffect(() => {
-    (async () => {
-      
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status == 'granted') {
-        navigate("Tabs");
-        return;
-      }
-    })();
-  }, [])
-
   const handleNavigateToLoginPage = () => navigate("Login");
 
   const handleAcceptGeolocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
-
-    if (status !== 'granted') {
-      Alert.alert("Error", 'Permission to access location was denied');
+    if (status !== "granted") {
+      await AsyncStorage.setItem("@Expo_Location_Access:", "false");
       return;
     } else {
-      Alert.alert("Accepted", 'We have your location');
+      await AsyncStorage.setItem("@Expo_Location_Access:", "true");
+      navigate("Tabs")
       return;
     }
-  }
+  };
 
   return (
     <Flex fill center>
@@ -50,15 +39,11 @@ export const AccessScreen = () => {
           Please allow it.
         </Text>
         <Stack style={accessStyles.button_container}>
-          <Pressable
-            onPress={handleAcceptGeolocation}
-          >
+          <Pressable onPress={handleAcceptGeolocation}>
             <Text style={accessStyles.inline_button_text}>Yes</Text>
           </Pressable>
           <Text style={accessStyles.inline_button_text}>/</Text>
-          <Pressable
-            onPress={handleNavigateToLoginPage}
-          >
+          <Pressable onPress={handleNavigateToLoginPage}>
             <Text style={accessStyles.inline_button_text}>No</Text>
           </Pressable>
         </Stack>
