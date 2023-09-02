@@ -8,7 +8,6 @@ import MapView, { Marker, Polygon } from "react-native-maps";
 import { Steps, StickyBalance } from "../components";
 import React from "react";
 import MapViewDirections from "react-native-maps-directions";
-import { EXPO_GOOGLE_API_KEY } from "@env";
 import * as Location from "expo-location";
 
 export const Home = () => {
@@ -33,7 +32,7 @@ export const Home = () => {
             startCoordinates.coords.latitude !== new_location.coords.latitude ||
             startCoordinates.coords.longitude !== new_location.coords.longitude
           ) {
-            setLocation(new_location); 
+            setLocation(new_location);
           } else {
             setStartCoordinates(new_location);
             setLocation(new_location);
@@ -96,29 +95,22 @@ export const Home = () => {
               }
             />
             <MapViewDirections
-              origin={startCoordinates
-                ? startCoordinates.coords
-                : {
-                    latitude: 0,
-                    longitude: 0,
-                  }}
-              destination={
-                location
-                  ? location.coords
-                  : {
-                      latitude: 0,
-                      longitude: 0,
-                    }
-              }
-              apikey={`${EXPO_GOOGLE_API_KEY.toString()}`}
+            // 52.220483708660666, 21.010548886134075
+              origin={{
+                latitude:startCoordinates ? startCoordinates.coords.latitude: 52.220483708660666,
+                longitude: startCoordinates ? startCoordinates.coords.longitude : 21.010548886134075,
+              }}
+              destination={{
+                latitude: location ? location.coords.latitude : 52.220483708660666,
+                longitude: location ? location.coords.longitude: 21.010548886134075,
+              }}
+              apikey={"AIzaSyDAQ9SXy13xbnnCR6xFacVIGUp5Ll_DZrU"}
               mode="WALKING"
               strokeWidth={3}
               strokeColor="hotpink"
-              onStart={(result) => {
+              onStart={(result: any) => {
                 setDistance(result.distance);
                 setDuration(result.duration);
-                console.log(`Distance: ${distance} km`);
-                console.log(`Duration: ${duration} min.`);
               }}
             />
             {coordinates &&
