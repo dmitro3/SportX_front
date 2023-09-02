@@ -21,6 +21,11 @@ export const walletStyles = StyleSheet.create({
         fontSize: 25,
         fontWeight: "bold",
     },
+    sub_title: {
+        color: "white",
+        fontSize: 20,
+        fontFamily: "Oswald"
+    },
     button: {
         margin: 5,
     }

@@ -2,9 +2,10 @@ import { Flex, Stack } from "@react-native-material/core";
 import { View, Text } from "react-native";
 import { navigate } from "../routes/navigation";
 import { LinearGradient } from "expo-linear-gradient";
-import { walletStyles } from "../styles";
+import { profileStyles } from "../styles";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
 import { useUserContext } from "../context/auth-context";
+import { ProfileImage } from "../components";
 
 export const Profile = () => {
 
@@ -21,14 +22,13 @@ export const Profile = () => {
     <Flex fill center>
       <LinearGradient
         colors={["#1C2438", "#0D154F", "#142177", "#581E88"]}
-        style={walletStyles.gradient_container}
+        style={profileStyles.gradient_container}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-          <View style={walletStyles.header_container}>
-            {/* Header */}
-          </View>
-          <Text style={walletStyles.header_text}>{user?.username}</Text>
+          <ProfileImage  style={profileStyles.avatar}/>
+          <Text style={profileStyles.header_text}>{user?.username}</Text>
+          <Text style={profileStyles.sub_title}>{user?.email}</Text>
       </LinearGradient>
     </Flex>
   );
