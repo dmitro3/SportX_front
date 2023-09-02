@@ -7,7 +7,6 @@ import ProfileImage from "../components/profile-image";
 import {useUserContext} from "../context/auth-context";
 import {CustomBottomSheetModal} from "../components";
 
-
 export const WalletScreen = () => {
     const {user} = useUserContext();
 
@@ -21,12 +20,23 @@ export const WalletScreen = () => {
             >
                 <View style={walletStyles.header_container}>
                     <Pressable onPress={() => navigate("Profile")}>
-                        <ProfileImage style={walletStyles.avatar}/>
+                        {/*<ProfileImage style={walletStyles.avatar}/>*/}
+                        <Image
+                            source={require("../assets/images/profile-image.png")}
+                            style={[
+                                {
+                                    width: 65,
+                                    height: 65,
+                                    borderRadius: 65 /2
+                                },
+                                walletStyles.avatar
+                            ]}
+                        />
                     </Pressable>
                 </View>
                 <Text style={walletStyles.header_text}>Balance</Text>
                 <View style={{flexDirection: "row", justifyContent: "center", alignItems: "center", width: "100%"}}>
-                    <Text style={{fontSize: 40, color: "white"}}>{parseFloat((user?.balance || 0.00).toString())}</Text>
+                    <Text style={{fontSize: 40, color: "white"}}>{(user?.balance || 0.00).toFixed(2)}</Text>
                     <Image
                         source={require("../assets/images/glow.png")}
                         style={{
@@ -37,7 +47,15 @@ export const WalletScreen = () => {
                 </View>
                 <View style={{
                     padding: 5,
-                    justifyContent: "center"
+                    height: 200,
+                    backgroundColor: "#00000040",
+                    justifyContent: "center",
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    borderBottomLeftRadius: 20,
+                    borderBottomRightRadius: 20
                 }}>
                     <Text style={walletStyles.invite_text}>Earn more SportCoins</Text>
                     <Text style={walletStyles.invite_text}>Invite more friends and earn from 10 to 1000 SX Coins from each invited friends</Text>

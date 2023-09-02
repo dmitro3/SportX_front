@@ -14,6 +14,7 @@ export const walletStyles = StyleSheet.create({
         alignItems: "flex-end",
     },
     avatar: {
+        marginTop: 15,
         marginRight: 15,
     },
     header_text: {
@@ -32,6 +33,7 @@ export const walletStyles = StyleSheet.create({
     invite_text: {
         color: "white",
         fontFamily: "Oswald",
-        fontSize: 20
+        fontSize: 20,
+        textAlign: "center",
     }
 })

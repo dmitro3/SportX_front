@@ -10,10 +10,10 @@ export const Steps = () => {
             flexDirection: "row",
             zIndex: 10000,
             alignItems: "center",
-            top: 20,
+            top: 50,
             left: 20,
-            padding: 5,
-            backgroundColor: "#00000050",
+            padding: 10,
+            backgroundColor: "#00000070",
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             borderBottomLeftRadius: 20,
@@ -24,8 +24,8 @@ export const Steps = () => {
           <Image
             source={require("../assets/images/boots.png")}
             style={{
-              width: 50,
-              height: 50,
+              width: 40,
+              height: 40,
             }}
           />
           <Text style={{ color: "white", fontSize: 20 }}>{user?.balance}</Text>
