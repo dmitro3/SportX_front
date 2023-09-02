@@ -10,32 +10,32 @@ import * as Linking from "expo-linking"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // navigation
-import { navigate } from "../routes/navigation";
+import {navigate} from "../routes/navigation";
 
 // styles
-import { loginStyles } from "../styles";
+import {loginStyles} from "../styles";
 
 // wallet connections
 import {
-  WalletConnectModal,
-  useWalletConnectModal,
+    WalletConnectModal,
+    useWalletConnectModal,
 } from "@walletconnect/modal-react-native";
-import { projectId, providerMetadata } from "../lib/wallet-connect";
+import {projectId, providerMetadata} from "../lib/wallet-connect";
 import axios from "axios";
-import { useUserContext } from "../context/auth-context";
-import { getUserData } from "../api/get-user-data";
-import { useEffect, useState } from "react";
+import {useUserContext} from "../context/auth-context";
+import {getUserData} from "../api/get-user-data";
+import {useEffect, useState} from "react";
 
 export const Login = () => {
-  const { isOpen, open, close, provider, isConnected, address } =
-    useWalletConnectModal();
+    const {isOpen, open, close, provider, isConnected, address} =
+        useWalletConnectModal();
 
-  const [ isWalletConnectWasClicked, setIsWalletConectWasClicked ] = useState<boolean>(false);
+    const [isWalletConnectWasClicked, setIsWalletConectWasClicked] = useState<boolean>(false);
     useEffect(() => {
-      const func = async () => {
-        const value = await AsyncStorage.getItem("access_token");
-      }
-      func()
+        const func = async () => {
+            const value = await AsyncStorage.getItem("access_token");
+        }
+        func()
     }, [])
 
     const {setUser} = useUserContext();
@@ -50,10 +50,10 @@ export const Login = () => {
     };
 
     const authHandler = async () => {
-      const result = await getUserData();
+        const result = await getUserData();
 
-      setUser(result);
-      navigationHandler();
+        setUser(result);
+        navigationHandler();
     }
 
     const navigationHandler = async () => {
@@ -94,132 +94,113 @@ export const Login = () => {
         }
     }
 
-  return (
-    <Flex fill center>
-      <LinearGradient
-        colors={["#1C2438", "#0D154F", "#142177", "#581E88"]}
-        style={loginStyles.gradient_container}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-          <Text style={loginStyles.header_text}>SportX</Text>
-         <View style={{
-          justifyContent: "center",
-          alignItems: "center",
-         }}>
-         <Text style={loginStyles.header_second}>Healthy</Text>
-          <Text style={loginStyles.header_third}>Ride</Text>
-          <Text style={loginStyles.header_fourth}>Run</Text>
-          <Text style={loginStyles.header_fifth}>Earn</Text>
-         </View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%"
-            }}
-          >
-            <Pressable onPress={() => navigate("AccessScreen")} style={{
-                  width: 100,
-                  height: 100,
+    return (
+        <Flex fill center>
+            <LinearGradient
+                colors={["#1C2438", "#0D154F", "#142177", "#581E88"]}
+                style={loginStyles.gradient_container}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+            >
+                <View style={{
+                    justifyContent: "flex-start",
+                    flexDirection: "column",
+                    width: "100%",
+                    marginTop: 20,
                 }}>
-              <Image
-                style={{
-                  width: "100%",
-                  height: "100%"
-                }}
-                source={require("../assets/images/discord.png")}
-              />
-            </Pressable>
-            <Pressable onPress={() => {
-              setIsWalletConectWasClicked((prev: boolean) => !prev);
-              open()
-            }}>
-              <Image
-                style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: 60 / 2,
-                }}
-                source={require("../assets/images/wallet_connect.png")}
-              />
-            </Pressable>
-          </View>
-          <LinearGradient
-        colors={['#574aff', '#6d61ff']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        style={{
-          width: 200,
-          height: 55,
-          justifyContent: 'center',
-          alignItems: "center",
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
-        }}
-      >
-          <Pressable 
-            style={{
-              backgroundColor: "transparent",
-              shadowColor: '#fff',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.8,
-              shadowRadius: 10,
-            }}
-            onPress={() => isConnected && isWalletConnectWasClicked ? loginHandler("wallet"):authHandler()}
-          ><Text style={{
-            color: "white",
-            fontSize: 25,
-            // fontWeight: "bold",
-            fontFamily: "Oswald"
-          }}>Login</Text></Pressable>
-      </LinearGradient>
-      <LinearGradient
-        colors={['#574aff', '#6d61ff']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        style={{
-          width: 200,
-          height: 55,
-          justifyContent: 'center',
-          alignItems: "center",
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
-          marginTop: 10
-        }}
-      >
-          <Pressable 
-            style={{
-              backgroundColor: "transparent",
-              shadowColor: '#fff',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.8,
-              shadowRadius: 10,
-            }}
-            onPress={() => isConnected && isWalletConnectWasClicked ? loginHandler("wallet"):authHandler()}
-          ><Text style={{
-            color: "white",
-            fontSize: 25,
-            // fontWeight: "bold",
-            fontFamily: "Oswald"
-          }}>Registration</Text></Pressable>
-      </LinearGradient>
-          <WalletConnectModal
-            projectId={projectId}
-            providerMetadata={providerMetadata}
-          />
-      </LinearGradient>
-    </Flex>
-  );
+                    <Text style={[loginStyles.header_text]}>SportX</Text>
+                    <Text style={[loginStyles.subtitle, {marginTop: 10}]}>DO SPORTS AND EARN</Text>
+                    <Text style={loginStyles.subtitle}>GET HEALTHIER AND EARN</Text>
+                    <Text style={loginStyles.subtitle}>MOVE AND EARN</Text>
+                </View>
+                <View>
+                    <Image
+                        source={require("../assets/images/glow__1_-removebg-preview.png")}
+                        style={{
+                            height: 450,
+                            width: 450
+                        }}
+                    />
+                </View>
+                <View style={{
+                    marginBottom: 50,
+                    width: "100%",
+                }}>
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            width: "100%"
+                        }}
+                    >
+                        <Pressable onPress={() => navigate("AccessScreen")} style={{
+                            width: 100,
+                            height: 100,
+                        }}>
+                            <Image
+                                style={{
+                                    width: "100%",
+                                    height: "100%"
+                                }}
+                                source={require("../assets/images/discord.png")}
+                            />
+                        </Pressable>
+                        <Pressable onPress={() => {
+                            setIsWalletConectWasClicked((prev: boolean) => !prev);
+                            open()
+                        }}>
+                            <Image
+                                style={{
+                                    width: 60,
+                                    height: 60,
+                                    borderRadius: 60 / 2,
+                                }}
+                                source={require("../assets/images/wallet_connect.png")}
+                            />
+                        </Pressable>
+                    </View>
+                    <LinearGradient
+                        colors={['#574aff', '#6d61ff']}
+                        start={{x: 0, y: 0}}
+                        end={{x: 1, y: 0}}
+                        style={{
+                            width: 200,
+                            height: 55,
+                            justifyContent: 'center',
+                            alignItems: "center",
+                            borderTopLeftRadius: 20,
+                            borderTopRightRadius: 20,
+                            borderBottomLeftRadius: 20,
+                            borderBottomRightRadius: 20,
+                            alignSelf: "center"
+                        }}
+                    >
+                        <Pressable
+                            style={{
+                                backgroundColor: "transparent",
+                                shadowColor: '#fff',
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                },
+                                shadowOpacity: 0.8,
+                                shadowRadius: 10,
+                            }}
+                            onPress={() => isConnected && isWalletConnectWasClicked ? loginHandler("wallet") : authHandler()}
+                        ><Text style={{
+                            color: "white",
+                            fontSize: 25,
+                            // fontWeight: "bold",
+                            fontFamily: "Oswald"
+                        }}>Login</Text></Pressable>
+                    </LinearGradient>
+                    <WalletConnectModal
+                        projectId={projectId}
+                        providerMetadata={providerMetadata}
+                    />
+                </View>
+            </LinearGradient>
+        </Flex>
+    );
 };

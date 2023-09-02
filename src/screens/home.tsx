@@ -95,9 +95,8 @@ export const Home = () => {
               }
             />
             <MapViewDirections
-            // 52.220483708660666, 21.010548886134075
               origin={{
-                latitude:startCoordinates ? startCoordinates.coords.latitude: 52.220483708660666,
+                latitude: startCoordinates ? startCoordinates.coords.latitude: 52.220483708660666,
                 longitude: startCoordinates ? startCoordinates.coords.longitude : 21.010548886134075,
               }}
               destination={{

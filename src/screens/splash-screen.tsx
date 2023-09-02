@@ -17,6 +17,7 @@ import { navigate } from "../routes/navigation";
 
 const loadFonts = async () => {
   await Font.loadAsync({
+    "Rubik": require("../assets/fonts/rubik.ttf"),
     'SourceCode': require('../assets/fonts/source-code-pro.ttf'),
     'Oswald': require("../assets/fonts/oswald.ttf")
   });
