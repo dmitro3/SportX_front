@@ -10,7 +10,17 @@ const App = () => {
       <SafeAreaView />
       <SplashScreenContextProvider>
           <MainStackNavigation />
-        </SplashScreenContextProvider>
+      </SplashScreenContextProvider>
+        {/* <BottomSheet
+        ref={bottomSheetRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+      >
+        <View>
+          <Text>Awesome 🎉</Text>
+        </View>
+      </BottomSheet> */}
     </GestureHandlerRootView>
   )
 }

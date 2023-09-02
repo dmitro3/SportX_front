@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { navigate } from "../routes/navigation";
 import { Button, Flex } from "@react-native-material/core";
 import { LinearGradient } from "expo-linear-gradient";
@@ -13,8 +13,22 @@ export const Home = () => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Text style={homeStyles.header_text}>Home Screeen</Text>
-        <Button onPress={() => navigate("Login")} title="Go to Login"></Button>
+        <View style={{position:"absolute", flexDirection: "row",  zIndex: 10000, alignItems: "center", top: 20, right: 20, padding: 5, backgroundColor: "red", borderTopLeftRadius: 20, borderTopRightRadius: 20, borderBottomLeftRadius: 20, borderBottomRightRadius: 20}}>
+          <Text style={{ color: "white", fontSize: 20}}>0.000</Text>
+          <Image 
+              source={require("../assets/images/glow.png")}
+              style={{
+                width: 50,
+                height: 50
+              }}
+            />
+        </View>
+        <View style={{ flex: 2, width: "100%", borderWidth: 1, backgroundColor: "white"}}>
+          {/* MAPS */}
+        </View>
+        <View style={{ flex: 1, width: "100%"}}>
+          {/* Statistics */}
+        </View>
       </LinearGradient>
     </Flex>
   );

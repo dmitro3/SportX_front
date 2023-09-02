@@ -1,10 +1,11 @@
 // ui
 import {
   StyleSheet,
-  Animated,
   TouchableOpacity,
+  View,
   Text
 } from "react-native";
+import BottomSheet from '@gorhom/bottom-sheet';
 
 // navigation
 import { CurvedBottomBarExpo } from "react-native-curved-bottom-bar";
@@ -13,9 +14,14 @@ import { CurvedBottomBarExpo } from "react-native-curved-bottom-bar";
 import { Home } from "../screens";
 import { WalletStackNavigation } from "./wallet-stack";
 
+// icons
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+// hooks
+import { useRef, useMemo, useCallback } from "react";
+
 export const TabNavigation = () => {
+
   const _renderIcon = (routeName: string, selectedTab: any) => {
     let icon = "";
 
