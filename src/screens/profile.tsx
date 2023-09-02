@@ -3,8 +3,17 @@ import { View, Text } from "react-native";
 import { navigate } from "../routes/navigation";
 import { LinearGradient } from "expo-linear-gradient";
 import { walletStyles } from "../styles";
+import { useWalletConnectModal } from "@walletconnect/modal-react-native";
 
 export const Profile = () => {
+
+      // console.log(provider?.disconnect())
+
+  const { provider } = useWalletConnectModal();
+  const web3Exist = () => {
+    provider?.disconnect();
+  }
+  
   return (
     <Flex fill center>
       <LinearGradient
