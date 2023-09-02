@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import {View} from "react-native";
 import { Flex } from "@react-native-material/core";
 import { LinearGradient } from "expo-linear-gradient";
 import { homeStyles } from "../styles";
@@ -9,12 +9,14 @@ import {CustomBottomSheetModal, Steps, StickyBalance} from "../components";
 import React from "react";
 import MapViewDirections from "react-native-maps-directions";
 import * as Location from "expo-location";
+import {useUserContext} from "../context/auth-context";
 
 export const Home = () => {
   const [coordinates, setCoordinates] = useState<any>(null);
   const [startCoordinates, setStartCoordinates] = useState<any>(null);
   const [location, setLocation] = useState<any>(null);
 
+  const { user } = useUserContext();
   const [distance, setDistance] = useState<any>(null);
   const [duration, setDuration] = useState<any>(null);
 
@@ -49,6 +51,17 @@ export const Home = () => {
         setCoordinates(res.data);
       });
   }, []);
+
+  const handleLandscapeOwning = async (id: string) => {
+      // if(!user) return;
+
+      // const result = await axios.post("https://9698-5-173-16-56.ngrok-free.app/maps/buy", {
+      //     regionId: id
+      // });
+
+      console.log(id);
+  }
+
 
   return (
     <Flex fill center>
@@ -114,13 +127,14 @@ export const Home = () => {
             />
             {coordinates &&
               coordinates.map((item: any, index: number) => (
-                <Polygon
-                  key={index}
-                  coordinates={item}
-                  strokeWidth={0.6}
-                  strokeColor={"blue"}
-                  fillColor={"rgba(0, 255, 0,.3)"}
-                />
+                  <Polygon
+                      key={index}
+                      coordinates={item.polygon}
+                      strokeWidth={0.6}
+                      strokeColor={"blue"}
+                      fillColor={"rgba(0, 255, 0,.3)"}
+                      onPress={() => handleLandscapeOwning(item.id)}
+                  />
               ))}
           </MapView>
         </View>
