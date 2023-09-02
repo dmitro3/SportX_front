@@ -6,6 +6,7 @@ import { homeStyles } from "../styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MapView, { Polygon } from "react-native-maps";
+import { StickyBalance } from "../components";
 
 export const Home = () => {
   const [coordinate, setCoordinate] = useState([]);
@@ -25,37 +26,15 @@ export const Home = () => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <View
-          style={{
-            position: "absolute",
-            flexDirection: "row",
-            zIndex: 10000,
-            alignItems: "center",
-            top: 20,
-            right: 20,
-            padding: 5,
-            backgroundColor: "red",
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}
-        >
-          <Text style={{ color: "white", fontSize: 20 }}>0.000</Text>
-          <Image
-            source={require("../assets/images/glow.png")}
-            style={{
-              width: 50,
-              height: 50,
-            }}
-          />
-        </View>
+        <StickyBalance />
         <View
           style={{
             flex: 2,
             width: "100%",
             borderWidth: 1,
             backgroundColor: "white",
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
           }}
         >
           <MapView

@@ -1,6 +1,6 @@
 // ui components
-import { Button, Flex, Stack } from "@react-native-material/core";
-import { Text, Alert } from "react-native";
+import { Avatar, Button, Flex, Stack } from "@react-native-material/core";
+import { Text, Alert, Pressable, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 // storage
@@ -22,6 +22,8 @@ import axios from "axios";
 import { EXPO_BACKEND_URL } from "@env"
 import { useUserContext } from "../context/auth-context";
 import { getUserData } from "../api/get-user-data";
+import { CookieJar } from "tough-cookie";
+import { WalletConnectIcon } from "../components";
 
 export const Login = () => {
   const { isOpen, open, close, provider, isConnected, address } =
@@ -45,6 +47,9 @@ export const Login = () => {
       });
 
       if(result.status === 200) {
+        // await AsyncStorage.setItem("@Expo_AccessToken:": `${result.headers.}`)
+        const cookies = new CookieJar().getCookies("https://0809-5-173-16-56.ngrok-free.app")
+
         const userMe = await getUserData();
         
         await setUser(userMe.data);
@@ -75,11 +80,16 @@ export const Login = () => {
             title="Discord Login"
             style={loginStyles.button}
           />
-          <Button
-            onPress={() => open()}
-            title="Wallet Connect"
-            style={loginStyles.button}
-          />
+          <Pressable onPress={() => open()}>
+              <Image
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 50 /2
+              }}
+              source={require("../assets/images/wallet_connect.png")}
+              />
+          </Pressable>
           <WalletConnectModal
             projectId={projectId}
             providerMetadata={providerMetadata}
