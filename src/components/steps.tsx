@@ -21,14 +21,14 @@ export const Steps = () => {
 
           }}
         >
-          <Text style={{ color: "white", fontSize: 20 }}>{user?.balance}</Text>
           <Image
-            source={require("../assets/images/glow.png")}
+            source={require("../assets/images/boots.png")}
             style={{
               width: 50,
               height: 50,
             }}
           />
+          <Text style={{ color: "white", fontSize: 20 }}>{user?.balance}</Text>
         </View>
     )
 }

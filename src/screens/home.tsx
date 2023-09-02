@@ -1,5 +1,5 @@
-import { View, Text, Image } from "react-native";
-import { Button, Flex } from "@react-native-material/core";
+import { View } from "react-native";
+import { Flex } from "@react-native-material/core";
 import { LinearGradient } from "expo-linear-gradient";
 import { homeStyles } from "../styles";
 import { useEffect, useState } from "react";
@@ -13,20 +13,32 @@ import * as Location from "expo-location";
 
 export const Home = () => {
   const [coordinates, setCoordinates] = useState<any>(null);
+  const [startCoordinates, setStartCoordinates] = useState<any>(null);
   const [location, setLocation] = useState<any>(null);
 
-  let MapData = {
-    distance: 0,
-    duration: 0,
-  };
-
-  // // Пример
+  const [distance, setDistance] = useState<any>(null);
+  const [duration, setDuration] = useState<any>(null);
 
   useEffect(() => {
     Location.watchPositionAsync(
       { accuracy: Location.Accuracy.High, timeInterval: 10 },
       (new_location) => {
-        setLocation(new_location);
+        if (startCoordinates === null) {
+          // If startCoordinates are null, set them to the initial location
+          setStartCoordinates(new_location);
+          setLocation(new_location);
+        } else {
+          // Compare the previous location with the new location
+          if (
+            startCoordinates.coords.latitude !== new_location.coords.latitude ||
+            startCoordinates.coords.longitude !== new_location.coords.longitude
+          ) {
+            setLocation(new_location); 
+          } else {
+            setStartCoordinates(new_location);
+            setLocation(new_location);
+          }
+        }
       }
     );
   }, [setLocation, location]);
@@ -75,8 +87,8 @@ export const Home = () => {
           >
             <Marker
               coordinate={
-                location
-                  ? location.coords
+                startCoordinates
+                  ? startCoordinates.coords
                   : {
                       latitude: 0,
                       longitude: 0,
@@ -84,29 +96,40 @@ export const Home = () => {
               }
             />
             <MapViewDirections
+              origin={startCoordinates
+                ? startCoordinates.coords
+                : {
+                    latitude: 0,
+                    longitude: 0,
+                  }}
+              destination={
+                location
+                  ? location.coords
+                  : {
+                      latitude: 0,
+                      longitude: 0,
+                    }
+              }
               apikey={`${EXPO_GOOGLE_API_KEY.toString()}`}
               mode="WALKING"
               strokeWidth={3}
               strokeColor="hotpink"
               onStart={(result) => {
-                MapData.distance = result.distance;
-                MapData.duration = result.duration;
-                console.log(`Distance: ${MapData.distance} km`);
-                console.log(`Duration: ${MapData.duration} min.`);
+                setDistance(result.distance);
+                setDuration(result.duration);
+                console.log(`Distance: ${distance} km`);
+                console.log(`Duration: ${duration} min.`);
               }}
             />
             {coordinates &&
               coordinates.map((item: any, index: number) => (
-                // <React.Fragment key={index}>
                 <Polygon
                   key={index}
                   coordinates={item}
                   strokeWidth={0.6}
                   strokeColor={"blue"}
-                  fillColor={"rgba(255, 0, 0,.3)"}
+                  fillColor={"rgba(0, 255, 0,.3)"}
                 />
-
-                // </React.Fragment>
               ))}
           </MapView>
         </View>
