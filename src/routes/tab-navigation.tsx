@@ -12,7 +12,6 @@ import Entypo from "react-native-vector-icons/Entypo";
 
 // screens
 import { Home, WalletScreen } from "../screens";
-import { Flex } from "@react-native-material/core";
 
 const Tabs = createBottomTabNavigator<TabsParamsList>();
 
@@ -22,6 +21,9 @@ export const TabNavigation = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          paddingBottom: 10,
+        }
       }}
     >
       <Tabs.Screen
@@ -31,24 +33,18 @@ export const TabNavigation = () => {
           tabBarLabel: ({ focused }) => (
             <Text
               style={{
-                fontSize: 10,
-                color: focused ? "red" : "black",
+                fontSize: 15,
               }}
             >
               Home
             </Text>
           ),
-          tabBarStyle: { paddingBottom: 7, paddingTop: 5 },
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ color, size }) => (
             <Entypo
               id="home"
               name="home"
-              style={[
-                {
-                  backgroundColor: focused ? "#ff33ff" : "transparent",
-                },
-              ]}
-              size={20}
+              color={color}
+              size={size}
             />
           ),
         }}
@@ -60,25 +56,19 @@ export const TabNavigation = () => {
           tabBarLabel: ({ focused }) => (
             <Text
               style={{
-                fontSize: 10,
-                color: focused ? "red" : "black",
+                fontSize: 15,
               }}
             >
               Wallet
             </Text>
           ),
-          tabBarStyle: { paddingBottom: 7, paddingTop: 5 },
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ color, size }) => (
            <View style={styles.icon_container} >
              <Entypo
               id="wallet"
               name="wallet"
-              style={[
-                {
-                  backgroundColor: focused ? "red" : "transparent",
-                },
-              ]}
-              size={20}
+              color={color}
+              size={size}
             />
            </View>
           ),
