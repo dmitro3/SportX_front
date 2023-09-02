@@ -4,13 +4,12 @@ import { SafeAreaView } from "react-native";
 import { SplashScreenContextProvider } from "./src/context/splash-context";
 
 
-
 const App = () => {
   return (
     <GestureHandlerRootView  style={{ flex: 1 }}>
       <SafeAreaView />
       <SplashScreenContextProvider>
-      <MainStackNavigation />
+          <MainStackNavigation />
         </SplashScreenContextProvider>
     </GestureHandlerRootView>
   )

@@ -8,7 +8,6 @@ export type MainStackParamsList = {
 export type TabsParamsList = {
     Home: undefined;
     WalletStack: undefined;
-    Profile: undefined;
 }
 
 export type WalletParamsList = {

@@ -1,105 +1,201 @@
 // ui
-import { Text, StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  Animated,
+  TouchableOpacity,
+  Text
+} from "react-native";
 
 // navigation
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-// types
-import { TabsParamsList } from "../types";
-
-// components
-import Entypo from "react-native-vector-icons/Entypo";
+import { CurvedBottomBarExpo } from "react-native-curved-bottom-bar";
 
 // screens
-import { Home, WalletScreen } from "../screens";
+import { Home } from "../screens";
 import { WalletStackNavigation } from "./wallet-stack";
 
-const Tabs = createBottomTabNavigator<TabsParamsList>();
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export const TabNavigation = () => {
+  const _renderIcon = (routeName: string, selectedTab: any) => {
+    let icon = "";
+
+    switch (routeName) {
+      case "Home":
+        icon = "ios-home-outline";
+        break;
+      case "WalletStack":
+        icon = "wallet-outline";
+        break;
+    }
+
+    return (
+      <Ionicons
+        name={icon}
+        size={25}
+        color={routeName === selectedTab ? "black" : "gray"}
+      />
+    );
+  };
+
+  const _renderSelectedTab = (selectedTab: string) => {
+    let icon = "";
+
+    switch (selectedTab) {
+      case "Home":
+        icon = "ios-home-outline";
+        break;
+      case "WalletStack":
+        icon = "wallet-outline";
+        break;
+    }
+
+    return (
+      <Ionicons
+        name={icon}
+        size={25}
+      />
+    );
+  }
+  const renderTabBar = ({
+    routeName,
+    selectedTab,
+    navigate,
+  }: {
+    routeName: string;
+    selectedTab: string;
+    navigate: any;
+  }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigate(routeName)}
+        style={styles.tabbarItem}
+      >
+        {_renderIcon(routeName, selectedTab)}
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <Tabs.Navigator
+    <CurvedBottomBarExpo.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerShown: false,
-        // tabBarStyle: {
-        //   paddingBottom: 10,
-        //   borderBottomLeftRadius: 20,
-        //   borderBottomRightRadius: 20,
-        //   borderTopLeftRadius: 20,
-        //   borderTopRightRadius: 20,
-        //   marginBottom: 50,
-        // }
-        tabBarStyle:{
-          backgroundColor:"#0e121d",
-          height:100,
-        },
-        tabBarItemStyle:{
-          backgroundColor:'#1c2438',
-          margin:5,
-          borderRadius:10,
-        }
+        headerShown: false
       }}
+      type="DOWN"
+      style={styles.shadow}
+      shadowStyle={styles.shawdow}
+      height={55}
+      circleWidth={50}
+      bgColor="white"
+      tabBar={renderTabBar}
+      circlePosition={"CENTER"}
+      renderCircle={({ selectedTab, navigate, routeName }) => (
+          <TouchableOpacity
+            style={[styles.btnCircle]}
+            onPress={() => {
+              navigate(routeName);
+            }}
+          >
+            {_renderSelectedTab(selectedTab)}
+          </TouchableOpacity>
+      )}
     >
-      <Tabs.Screen
+      <CurvedBottomBarExpo.Screen
         name="Home"
+        position="LEFT"
         component={Home}
-        options={{
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={{
-                fontSize: 15,
-                color: "white"
-              }}
-            >
-              Home
-            </Text>
-          ),
-          tabBarIcon: ({ color, size }) => (
-            <Entypo
-              id="home"
-              name="home"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
       />
-      <Tabs.Screen
+      <CurvedBottomBarExpo.Screen
         name="WalletStack"
+        position="RIGHT"
         component={WalletStackNavigation}
-        options={{
-          tabBarLabel: ({ focused }) => (
-            <Text
-              style={{
-                fontSize: 15,
-                color: "white"
-              }}
-            >
-              Wallet
-            </Text>
-          ),
-          tabBarIcon: ({ color, size }) => (
-           <View style={styles.icon_container} >
-             <Entypo
-              id="wallet"
-              name="wallet"
-              color={color}
-              size={size}
-            />
-           </View>
-          ),
-        }}
       />
-    </Tabs.Navigator>
+    </CurvedBottomBarExpo.Navigator>
   );
 };
 
-const styles = StyleSheet.create({
-  icon_container: {
-    width: "100%",
-    height: "100%",
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  btnCircle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 1,
+    bottom: 28,
+  },
+  shawdow: {
+    shadowColor: "#DDDDDD",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+  },
+  button: {
+    flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+  },
+  bottomBar: {},
+  btnCircleUp: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E8E8E8',
+    bottom: 18,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 1,
+  },
+  imgCircle: {
+    width: 30,
+    height: 30,
+    tintColor: "gray",
+  },
+  tabbarItem: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  img: {
+    width: 30,
+    height: 30,
+  },
+  screen1: {
+    flex: 1,
+    backgroundColor: "#BFEFFF",
+  },
+  screen2: {
+    flex: 1,
+    backgroundColor: "#FFEBCD",
+  },
+  shadow: {
+    shadowColor: '#DDDDDD',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 5,
   },
 });

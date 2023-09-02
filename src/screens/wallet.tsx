@@ -1,9 +1,8 @@
-import { Avatar, Flex, Stack } from "@react-native-material/core";
-import { View, Text, Pressable } from "react-native";
+import { Flex, Stack } from "@react-native-material/core";
+import { View, Text, Pressable, Image} from "react-native";
 import { navigate } from "../routes/navigation";
 import { LinearGradient } from "expo-linear-gradient";
 import { walletStyles } from "../styles";
-import { Image } from "react-native-svg";
 import ProfileImage from "../components/profile-image";
 
 
@@ -22,6 +21,16 @@ export const WalletScreen = () => {
             </Pressable>
           </View>
           <Text style={walletStyles.header_text}>Balance</Text>
+          <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", width: "100%"}} >
+            <Text style={{ fontSize: 20, color: "white" }}>0</Text>
+            <Image 
+              source={require("../assets/images/glow.png")}
+              style={{
+                width: 50,
+                height: 50
+              }}
+            />
+          </View>
       </LinearGradient>
     </Flex>
   );
