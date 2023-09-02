@@ -65,16 +65,16 @@ export const Home = () => {
               longitudeDelta: 0.0421,
             }}
           >
-            <MapViewDirections
+            {/* <MapViewDirections
           origin={coordinates}
-          destination={props.region}
-          apikey={API_MAP.API}
+          destination={coordinates[0]}
+          apikey={""}
           strokeWidth={3}
           strokeColor="hotpink"
           onReady={result => {
             console.log(result)
           }}
-        />
+        /> */}
             {coordinates && coordinates.map((item: any, index: number) => (
               // <React.Fragment key={index}>
               <Polygon
