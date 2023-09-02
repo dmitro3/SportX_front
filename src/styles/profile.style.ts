@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const walletStyles = StyleSheet.create({
+export const profileStyles = StyleSheet.create({
     gradient_container: {
         width: "100%",
         height: "100%",

@@ -4,4 +4,6 @@ declare module "@env" {
     export const EXPO_WALLET_CONNECT_PROJECT_URL: string;
 
     export const EXPO_BACKEND_URL: string;
+
+    export const EXPO_GOOGLE_API_KEY: string;
 }
