@@ -7,6 +7,8 @@ export const accessStyles = StyleSheet.create({
         justifyContent: "flex-start",
         paddingTop: 40,
         alignItems: "center",
+        paddingLeft: 20,
+        paddingRight: 20
     },
     header_text: {
         color: "white",
@@ -16,6 +18,7 @@ export const accessStyles = StyleSheet.create({
     },
     button_container: {
         flexDirection: "row",
+        padding: 20,
         marginTop: 5
     },
     inline_button_text: {

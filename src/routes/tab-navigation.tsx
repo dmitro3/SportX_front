@@ -1,11 +1,6 @@
 // ui
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text
-} from "react-native";
-import BottomSheet from '@gorhom/bottom-sheet';
+import { StyleSheet, TouchableOpacity, Image, Text } from "react-native";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 // navigation
 import { CurvedBottomBarExpo } from "react-native-curved-bottom-bar";
@@ -14,62 +9,59 @@ import { CurvedBottomBarExpo } from "react-native-curved-bottom-bar";
 import { Home } from "../screens";
 import { WalletStackNavigation } from "./wallet-stack";
 
-// icons
-import Ionicons from "react-native-vector-icons/Ionicons";
-
 // hooks
 import { useEffect } from "react";
 import { TabDataProvider, useTabData } from "../context/tab-context";
 
 const TabNavigator = () => {
-
   const { selectedTab, setSelectedTab, fetchData } = useTabData();
 
   useEffect(() => {
     fetchData();
   }, [selectedTab]);
 
-
   const _renderIcon = (routeName: string, selectedTab: any) => {
-    let icon = "";
-
     switch (routeName) {
       case "Home":
-        icon = "ios-home-outline";
-        break;
+        return (
+          <Image
+            style={[
+              {
+                width: 50,
+                height: 50,
+              },
+              selectedTab === routeName && {
+                ...styles.shadow,
+                shadowColor: "#581E88",
+                shadowRadius: 4,
+                shadowOpacity: 1,
+                overflow: "hidden",
+              },
+            ]}
+            source={require("../assets/images/home.png")}
+          />
+        );
       case "WalletStack":
-        icon = "wallet-outline";
-        break;
+        return (
+          <Image
+            style={[
+              {
+                width: 80,
+                height: 80,
+              },
+              selectedTab === routeName && {
+                ...styles.shadow,
+                shadowColor: "#581E88",
+                shadowRadius: 10,
+                overflow: "hidden",
+              },
+            ]}
+            source={require("../assets/images/wallet.png")}
+          />
+        );
     }
-
-    return (
-      <Ionicons
-        name={icon}
-        size={25}
-        color={routeName === selectedTab ? "black" : "gray"}
-      />
-    );
   };
 
-  const _renderSelectedTab = (selectedTab: string) => {
-    let icon = "";
-
-    switch (selectedTab) {
-      case "Home":
-        icon = "ios-home-outline";
-        break;
-      case "WalletStack":
-        icon = "wallet-outline";
-        break;
-    }
-
-    return (
-      <Ionicons
-        name={icon}
-        size={25}
-      />
-    );
-  }
   const renderTabBar = ({
     routeName,
     selectedTab,
@@ -82,8 +74,8 @@ const TabNavigator = () => {
     return (
       <TouchableOpacity
         onPress={() => {
-          setSelectedTab(routeName)
-          navigate(routeName)
+          setSelectedTab(routeName);
+          navigate(routeName);
         }}
         style={styles.tabbarItem}
       >
@@ -96,7 +88,10 @@ const TabNavigator = () => {
     <CurvedBottomBarExpo.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerShown: false
+        headerShown: false,
+        tabBarItemStyle: {
+          backgroundColor: "transparent",
+        },
       }}
       type="DOWN"
       style={styles.shadow}
@@ -107,14 +102,20 @@ const TabNavigator = () => {
       tabBar={renderTabBar}
       circlePosition={"CENTER"}
       renderCircle={({ selectedTab, navigate, routeName }) => (
-          <TouchableOpacity
-            style={[styles.btnCircle]}
-            onPress={() => {
-              navigate(routeName);
+        <TouchableOpacity
+          style={[styles.btnCircle]}
+          onPress={() => {
+            navigate(routeName);
+          }}
+        >
+          <Image
+            style={{
+              width: 50,
+              height: 50,
             }}
-          >
-            {_renderSelectedTab(selectedTab)}
-          </TouchableOpacity>
+            source={require("../assets/images/main.png")}
+          />
+        </TouchableOpacity>
       )}
     >
       <CurvedBottomBarExpo.Screen
@@ -135,7 +136,7 @@ export const TabNavigation = () => (
   <TabDataProvider>
     <TabNavigator />
   </TabDataProvider>
-)
+);
 
 export const styles = StyleSheet.create({
   container: {
@@ -146,10 +147,10 @@ export const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    shadowColor: '#000',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -177,11 +178,11 @@ export const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E8E8E8',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#E8E8E8",
     bottom: 18,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -213,7 +214,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#FFEBCD",
   },
   shadow: {
-    shadowColor: '#DDDDDD',
+    shadowColor: "#DDDDDD",
     shadowOffset: {
       width: 0,
       height: 0,

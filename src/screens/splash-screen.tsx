@@ -7,7 +7,6 @@ import { useFonts } from 'expo-font';
 
 // context
 import { splashScreenContext } from "../context/splash-context";
-import { useUserAuth } from "../context/auth-context";
 
 
 // enable expo splash screen
@@ -19,6 +18,7 @@ import { navigate } from "../routes/navigation";
 const loadFonts = async () => {
   await Font.loadAsync({
     'SourceCode': require('../assets/fonts/source-code-pro.ttf'),
+    'Oswald': require("../assets/fonts/oswald.ttf")
   });
 };
 

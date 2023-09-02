@@ -13,11 +13,12 @@ export const StickyBalance = () => {
             top: 20,
             right: 20,
             padding: 5,
-            backgroundColor: "red",
+            backgroundColor: "#00000050",
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
+
           }}
         >
           <Text style={{ color: "white", fontSize: 20 }}>{user?.balance}</Text>

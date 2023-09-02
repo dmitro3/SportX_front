@@ -81,42 +81,70 @@ export const Login = () => {
         }
     }
 
-    return (
-        <Flex fill center>
-            <LinearGradient
-                colors={["#1C2438", "#0D154F", "#142177", "#581E88"]}
-                style={loginStyles.gradient_container}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-            >
-                <Stack>
-                    <Text style={loginStyles.header_text}>Welcome</Text>
-                    <Button
-                        onPress={() => loginHandler("wallet")}
-                        title="Go to next page"
-                        style={loginStyles.button}
-                    />
-                    <Button
-                        onPress={_handlePressButtonAsync}
-                        title="Discord Login"
-                        style={loginStyles.button}
-                    />
-                    <Pressable onPress={() => open()}>
-                        <Image
-                            style={{
-                                width: 50,
-                                height: 50,
-                                borderRadius: 50 / 2
-                            }}
-                            source={require("../assets/images/wallet_connect.png")}
-                        />
-                    </Pressable>
-                    <WalletConnectModal
-                        projectId={projectId}
-                        providerMetadata={providerMetadata}
-                    />
-                </Stack>
-            </LinearGradient>
-        </Flex>
-    );
+  return (
+    <Flex fill center>
+      <LinearGradient
+        colors={["#1C2438", "#0D154F", "#142177", "#581E88"]}
+        style={loginStyles.gradient_container}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
+          <Text style={loginStyles.header_text}>SportX</Text>
+         <View style={{
+          justifyContent: "center",
+          alignItems: "center",
+         }}>
+         <Text style={loginStyles.header_second}>Healthy</Text>
+          <Text style={loginStyles.header_third}>Ride</Text>
+          <Text style={loginStyles.header_fourth}>Run</Text>
+          <Text style={loginStyles.header_fifth}>Earn</Text>
+         </View>
+          {/* <Button
+            onPress={() => loginHandler("wallet")}
+            title="Go to next page"
+            style={loginStyles.button}
+          /> */}
+          {/* <Button
+            onPress={() => navigate("AccessScreen")}
+            title="Discord Login"
+            style={loginStyles.button}
+          /> */}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%"
+            }}
+          >
+            <Pressable onPress={() => navigate("AccessScreen")} style={{
+                  width: 100,
+                  height: 100,
+                }}>
+              <Image
+                style={{
+                  width: "100%",
+                  height: "100%"
+                }}
+                source={require("../assets/images/discord.png")}
+              />
+            </Pressable>
+            <Pressable onPress={() => open()}>
+              <Image
+                style={{
+                  width: 60,
+                  height: 60,
+                  borderRadius: 60 / 2,
+                }}
+                source={require("../assets/images/wallet_connect.png")}
+              />
+            </Pressable>
+          </View>
+          <WalletConnectModal
+            projectId={projectId}
+            providerMetadata={providerMetadata}
+          />
+      </LinearGradient>
+    </Flex>
+  );
 };
