@@ -5,7 +5,7 @@ import { homeStyles } from "../styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MapView, { Marker, Polygon } from "react-native-maps";
-import { Steps, StickyBalance } from "../components";
+import {CustomBottomSheetModal, Steps, StickyBalance} from "../components";
 import React from "react";
 import MapViewDirections from "react-native-maps-directions";
 import * as Location from "expo-location";
@@ -125,6 +125,7 @@ export const Home = () => {
           </MapView>
         </View>
       </LinearGradient>
+        <CustomBottomSheetModal />
     </Flex>
   );
 };

@@ -117,8 +117,8 @@ export const Login = () => {
                     <Image
                         source={require("../assets/images/glow__1_-removebg-preview.png")}
                         style={{
-                            height: 450,
-                            width: 450
+                            height: 350,
+                            width: 350
                         }}
                     />
                 </View>
@@ -188,12 +188,13 @@ export const Login = () => {
                                 shadowRadius: 10,
                             }}
                             onPress={() => isConnected && isWalletConnectWasClicked ? loginHandler("wallet") : authHandler()}
-                        ><Text style={{
+                        >
+                            <Text style={{
                             color: "white",
                             fontSize: 25,
-                            // fontWeight: "bold",
                             fontFamily: "Oswald"
-                        }}>Login</Text></Pressable>
+                        }}>Login</Text>
+                        </Pressable>
                     </LinearGradient>
                     <WalletConnectModal
                         projectId={projectId}

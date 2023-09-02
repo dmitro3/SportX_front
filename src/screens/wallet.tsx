@@ -6,6 +6,7 @@ import {walletStyles} from "../styles";
 import ProfileImage from "../components/profile-image";
 import {useUserContext} from "../context/auth-context";
 import {CustomBottomSheetModal} from "../components";
+import React from "react";
 
 export const WalletScreen = () => {
     const {user} = useUserContext();
@@ -98,6 +99,7 @@ export const WalletScreen = () => {
                     </LinearGradient>
                 </View>
             </LinearGradient>
+            <CustomBottomSheetModal />
         </Flex>
     );
 };
