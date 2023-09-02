@@ -10,27 +10,26 @@ import * as Linking from "expo-linking"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // navigation
-import {navigate} from "../routes/navigation";
+import { navigate } from "../routes/navigation";
 
 // styles
-import {loginStyles} from "../styles";
+import { loginStyles } from "../styles";
 
 // wallet connections
 import {
-    WalletConnectModal,
-    useWalletConnectModal,
+  WalletConnectModal,
+  useWalletConnectModal,
 } from "@walletconnect/modal-react-native";
-import {projectId, providerMetadata} from "../lib/wallet-connect";
+import { projectId, providerMetadata } from "../lib/wallet-connect";
 import axios from "axios";
-import {EXPO_BACKEND_URL} from "@env"
-import {useUserContext} from "../context/auth-context";
-import {getUserData} from "../api/get-user-data";
-
+import { useUserContext } from "../context/auth-context";
+import { getUserData } from "../api/get-user-data";
+import { CookieJar } from "tough-cookie";
 
 export const Login = () => {
-    const {isOpen, open, close, provider, isConnected, address} =
-        useWalletConnectModal();
-
+  const { isOpen, open, close, provider, isConnected, address } =
+    useWalletConnectModal();
+  provider?.disconnect();
 
     const {setUser} = useUserContext();
     const _handlePressButtonAsync = async () => {
@@ -80,6 +79,7 @@ export const Login = () => {
             }
         }
     }
+  };
 
   return (
     <Flex fill center>

@@ -6,7 +6,7 @@ import { homeStyles } from "../styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import MapView, { Polygon } from "react-native-maps";
-import { StickyBalance } from "../components";
+import { CustomBottomSheetModal, Steps, StickyBalance } from "../components";
 
 export const Home = () => {
   const [coordinate, setCoordinate] = useState([]);
@@ -26,12 +26,12 @@ export const Home = () => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
+        <Steps />
         <StickyBalance />
         <View
           style={{
             flex: 2,
             width: "100%",
-            borderWidth: 1,
             backgroundColor: "white",
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
@@ -63,7 +63,6 @@ export const Home = () => {
             ))}
           </MapView>
         </View>
-        <View style={{ flex: 1, width: "100%" }}>{/* Statistics */}</View>
       </LinearGradient>
     </Flex>
   );
