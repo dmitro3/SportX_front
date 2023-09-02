@@ -2,7 +2,7 @@
 import {
   StyleSheet,
   TouchableOpacity,
-  View,
+  Image,
   Text
 } from "react-native";
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -31,45 +31,25 @@ const TabNavigator = () => {
 
 
   const _renderIcon = (routeName: string, selectedTab: any) => {
-    let icon = "";
-
     switch (routeName) {
       case "Home":
-        icon = "ios-home-outline";
-        break;
+        return <Image 
+        style={{
+          width: 50,
+          height: 50
+        }}
+          source={require("../assets/images/home.png")}
+        />
       case "WalletStack":
-        icon = "wallet-outline";
-        break;
-    }
-
-    return (
-      <Ionicons
-        name={icon}
-        size={25}
-        color={routeName === selectedTab ? "black" : "gray"}
+        return <Image style={{
+          width: 50,
+          height: 50
+        }}
+        source={require("../assets/images/wallet.png")}
       />
-    );
+    }
   };
 
-  const _renderSelectedTab = (selectedTab: string) => {
-    let icon = "";
-
-    switch (selectedTab) {
-      case "Home":
-        icon = "ios-home-outline";
-        break;
-      case "WalletStack":
-        icon = "wallet-outline";
-        break;
-    }
-
-    return (
-      <Ionicons
-        name={icon}
-        size={25}
-      />
-    );
-  }
   const renderTabBar = ({
     routeName,
     selectedTab,
@@ -113,7 +93,13 @@ const TabNavigator = () => {
               navigate(routeName);
             }}
           >
-            {_renderSelectedTab(selectedTab)}
+            <Image
+            style={{
+              width: 50,
+              height: 50
+            }}
+              source={require("../assets/images/main.png")}
+            />
           </TouchableOpacity>
       )}
     >
