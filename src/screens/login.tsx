@@ -87,7 +87,7 @@ export const Login = () => {
                 const userMe = await getUserData();
 
                 await setUser(userMe);
-                navigationHandler();
+                await navigationHandler();
             } else {
                 Alert.alert("Error", "Something went wrong")
             }

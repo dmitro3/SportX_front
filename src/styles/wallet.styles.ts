@@ -19,7 +19,7 @@ export const walletStyles = StyleSheet.create({
     header_text: {
         color: "white",
         fontSize: 25,
-        fontWeight: "bold",
+        fontFamily: "Oswald"
     },
     sub_title: {
         color: "white",
@@ -28,5 +28,10 @@ export const walletStyles = StyleSheet.create({
     },
     button: {
         margin: 5,
+    },
+    invite_text: {
+        color: "white",
+        fontFamily: "Oswald",
+        fontSize: 20
     }
 })

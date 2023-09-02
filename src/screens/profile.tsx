@@ -1,6 +1,5 @@
 import { Flex, Stack } from "@react-native-material/core";
 import { View, Text } from "react-native";
-import { navigate } from "../routes/navigation";
 import { LinearGradient } from "expo-linear-gradient";
 import { profileStyles } from "../styles";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
@@ -9,8 +8,6 @@ import { ProfileImage } from "../components";
 
 export const Profile = () => {
 
-      // console.log(provider?.disconnect())
-  
       const { user } = useUserContext();
 
   const { provider } = useWalletConnectModal();

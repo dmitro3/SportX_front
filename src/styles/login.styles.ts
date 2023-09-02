@@ -11,7 +11,7 @@ export const loginStyles = StyleSheet.create({
         color: "white",
         fontSize: 50,
         alignSelf: "center",
-        textAlgin: "center",
+        textAlign: "center",
         fontFamily: "Rubik",
         marginTop: 50
     },
