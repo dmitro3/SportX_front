@@ -4,9 +4,12 @@ import { navigate } from "../routes/navigation";
 import { LinearGradient } from "expo-linear-gradient";
 import { walletStyles } from "../styles";
 import ProfileImage from "../components/profile-image";
+import { useUserContext } from "../context/auth-context";
 
 
 export const WalletScreen = () => {
+  const { user } = useUserContext();
+  console.log(user)
   return (
     <Flex fill center>
       <LinearGradient
@@ -22,7 +25,7 @@ export const WalletScreen = () => {
           </View>
           <Text style={walletStyles.header_text}>Balance</Text>
           <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", width: "100%"}} >
-            <Text style={{ fontSize: 20, color: "white" }}>0</Text>
+            <Text style={{ fontSize: 20, color: "white" }}>{user?.balance}</Text>
             <Image 
               source={require("../assets/images/glow.png")}
               style={{

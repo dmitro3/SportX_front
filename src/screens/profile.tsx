@@ -4,16 +4,19 @@ import { navigate } from "../routes/navigation";
 import { LinearGradient } from "expo-linear-gradient";
 import { walletStyles } from "../styles";
 import { useWalletConnectModal } from "@walletconnect/modal-react-native";
+import { useUserContext } from "../context/auth-context";
 
 export const Profile = () => {
 
       // console.log(provider?.disconnect())
+  
+      const { user } = useUserContext();
 
   const { provider } = useWalletConnectModal();
   const web3Exist = () => {
     provider?.disconnect();
   }
-  
+
   return (
     <Flex fill center>
       <LinearGradient
@@ -25,7 +28,7 @@ export const Profile = () => {
           <View style={walletStyles.header_container}>
             {/* Header */}
           </View>
-          <Text style={walletStyles.header_text}>It's me, and we are gonna learn C++</Text>
+          <Text style={walletStyles.header_text}>{user?.username}</Text>
       </LinearGradient>
     </Flex>
   );

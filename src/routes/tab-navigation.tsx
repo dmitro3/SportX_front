@@ -18,9 +18,17 @@ import { WalletStackNavigation } from "./wallet-stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 // hooks
-import { useRef, useMemo, useCallback } from "react";
+import { useEffect } from "react";
+import { TabDataProvider, useTabData } from "../context/tab-context";
 
-export const TabNavigation = () => {
+const TabNavigator = () => {
+
+  const { selectedTab, setSelectedTab, fetchData } = useTabData();
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedTab]);
+
 
   const _renderIcon = (routeName: string, selectedTab: any) => {
     let icon = "";
@@ -73,7 +81,10 @@ export const TabNavigation = () => {
   }) => {
     return (
       <TouchableOpacity
-        onPress={() => navigate(routeName)}
+        onPress={() => {
+          setSelectedTab(routeName)
+          navigate(routeName)
+        }}
         style={styles.tabbarItem}
       >
         {_renderIcon(routeName, selectedTab)}
@@ -119,6 +130,12 @@ export const TabNavigation = () => {
     </CurvedBottomBarExpo.Navigator>
   );
 };
+
+export const TabNavigation = () => (
+  <TabDataProvider>
+    <TabNavigator />
+  </TabDataProvider>
+)
 
 export const styles = StyleSheet.create({
   container: {

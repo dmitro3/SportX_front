@@ -21,13 +21,14 @@ import { projectId, providerMetadata } from "../lib/wallet-connect";
 import axios from "axios";
 import { EXPO_BACKEND_URL } from "@env"
 import { useUserContext } from "../context/auth-context";
+import { getUserData } from "../api/get-user-data";
 
 export const Login = () => {
   const { isOpen, open, close, provider, isConnected, address } =
     useWalletConnectModal();
 
   const { setUser } = useUserContext();
-  
+
   const navigationHandler = async () => {
     const value = await AsyncStorage.getItem("@Expo_Location_Access:");
     if (value !== null && value === "true") {
@@ -44,7 +45,7 @@ export const Login = () => {
       });
 
       if(result.status === 200) {
-        const userMe = await axios.get(`https://0809-5-173-16-56.ngrok-free.app/user/me`);
+        const userMe = await getUserData();
         
         await setUser(userMe.data);
         navigationHandler();
