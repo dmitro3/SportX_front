@@ -1,5 +1,5 @@
 // ui components
-import {Avatar, Button, Flex, Stack} from "@react-native-material/core";
+import {Flex} from "@react-native-material/core";
 import {Text, Alert, Pressable, Image, View} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 // @ts-ignore

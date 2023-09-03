@@ -5,6 +5,16 @@ export interface User {
     provider: string;
     providerId: string;
     username: string;
+    maps: Polygon[]
+}
+
+interface Polygon {
+    amount: number,
+    city: stirng;
+    id: number;
+    isBuy: boolean;
+    region: string;
+    userId: string;
 }
 
 

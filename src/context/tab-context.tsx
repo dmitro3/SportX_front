@@ -31,7 +31,8 @@ export const TabDataProvider: React.FC<TabDataProviderProps> = ({ children }) =>
     try {
       const userMe = await getUserData();
 
-      setUser(userMe.data);
+      console.log("userMe", userMe)
+      setUser(userMe);
     } catch (error) {
       console.error('Error fetching data:', error);
     }

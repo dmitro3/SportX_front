@@ -162,7 +162,7 @@ export const Home = () => {
                                     coordinates={item.polygon}
                                     strokeWidth={0.6}
                                     strokeColor={"blue"}
-                                    fillColor={isRegionWasByed && item.id === "2536106" ? "orange" : "rgba(0, 255, 0,.3)"}
+                                    fillColor={item.polygon.find((el: { isBuy: boolean; })=>el.isBuy)? "#FFA50060" : "rgba(0, 255, 0,.3)"}
                                 />
                             ))}
                     </MapView>
