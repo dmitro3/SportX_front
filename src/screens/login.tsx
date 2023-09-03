@@ -53,7 +53,7 @@ export const Login = () => {
         const result = await getUserData();
 
         setUser(result);
-        navigationHandler();
+        await navigationHandler();
     }
 
     const navigationHandler = async () => {
@@ -86,7 +86,7 @@ export const Login = () => {
             if (result.status === 200) {
                 const userMe = await getUserData();
 
-                await setUser(userMe);
+                setUser(userMe);
                 await navigationHandler();
             } else {
                 Alert.alert("Error", "Something went wrong")
@@ -148,7 +148,7 @@ export const Login = () => {
                         </Pressable>
                         <Pressable onPress={() => {
                             setIsWalletConectWasClicked((prev: boolean) => !prev);
-                            open()
+                            void open()
                         }}>
                             <Image
                                 style={{

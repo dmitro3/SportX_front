@@ -7,3 +7,5 @@ declare module "@env" {
 
     export const EXPO_GOOGLE_API_KEY: string;
 }
+
+declare module 'geojson-utils';

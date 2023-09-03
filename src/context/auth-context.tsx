@@ -22,7 +22,7 @@ interface ContextProviderProps {
 export const AuthContextProvider: FC<ContextProviderProps> = memo(
   ({ children }) => {
     // boolean variables indicating that the loading is complete (default - false)
-    const [ user, setUser ] = useState<User>();
+    const [ user, setUser ] = useState<User | undefined>();
 
     return (
       <authContext.Provider

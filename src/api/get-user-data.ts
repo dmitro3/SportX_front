@@ -6,8 +6,9 @@ export const getUserData = async () => await axios.get(`https://9698-5-173-16-56
     headers: {
         Cookie: await AsyncStorage.getItem("access_token")
     }
-}).then().catch(async err => {
-    await AsyncStorage.removeItem("access_token");
-})
+}).then(res => res.data)
+    .catch(async err => {
+        await AsyncStorage.removeItem("access_token");
+    });
 
 

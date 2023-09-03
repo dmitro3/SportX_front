@@ -30,7 +30,7 @@ export const TabDataProvider: React.FC<TabDataProviderProps> = ({ children }) =>
     // Perform your data fetching logic here
     try {
       const userMe = await getUserData();
-      // TODO: Update smth
+
       setUser(userMe.data);
     } catch (error) {
       console.error('Error fetching data:', error);

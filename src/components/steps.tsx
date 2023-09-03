@@ -3,6 +3,7 @@ import { useUserContext } from "../context/auth-context";
 
 export const Steps = () => {
     const { user } = useUserContext();
+    // console.log("user", user?.balance)
     return (
         <View
           style={{
